@@ -1,0 +1,50 @@
+<html>
+
+<head>
+    <title> Login </title>
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+    <link rel="stylesheet" type="text/css" href="css/util.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+</head>
+
+<body>
+    <div class="login-box">
+        <img src="assets/images/icons/avatar.png" class="avatar">
+        <h1>Login Here</h1>
+        <!-- <img src="https://thumbs.gfycat.com/UnfoldedCleverGermanspitz-max-1mb.gif" id="login_success_gif" alt=""> -->
+        <span style="display: none;" id="login_success_message">Login Success</span>
+        <form>
+            <div id="img_url" style="display: none;"></div>
+            <p>Email</p>
+            <input id="email" type="email" required name="email" placeholder="Enter Email">
+            <p>Password</p>
+            <input id="password" type="password" name="pass" required placeholder="Password">
+            <input type="hidden" value="" id="login_capture_img">
+            <button class="login-form-btn" value="submit" id="sign_in">
+                    Sign in
+                    <br>
+                </button>
+
+            <a href="signup.html">Create New Account</a> <br> <br>
+            <span style="display: none;" id="error_message">Invalid email or password</span>
+            <input type="hidden" value="<script scr='https://l2.io/ip.js'></script>" id="ip_address">
+        </form>
+    </div>
+</body>
+<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<script src="js/check_firsttime_login.js"></script>
+<script src="js/login.js"></script>
+<script src="js/webcam.min.js "></script>
+<script src="js/logout.js"></script>
+<script>
+    Webcam.set({
+        width: 200,
+        height: 150,
+        image_format: 'jpeg',
+        jpeg_quality: 90
+    });
+    Webcam.attach('#img_url');
+</script>
+
+</html>

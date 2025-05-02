@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="css/transaction.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="js/profile.js"></script>
+    <!-- <script src="js/take_snapshot.js "></script> -->
+    <script src="js/webcam.min.js "></script>
+
+    <script src="js/signup.js "></script>
+
+</head>
+
+<body onload="check_user_online()">
+
+
+    <div class="row">
+        <div class="col-3 col-s-3 menu">
+            <a href="profile.html">
+                <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" id="dashboard_image">
+            </a>
+            <!-- <br> -->
+            <h5 id="Username" style="text-align: center;color: oldlace;"></h5>
+            <hr>
+            <ul>
+                <a href="profile.html">
+                    <li> <i class="fa fa-user" aria-hidden="true"></i> &nbsp; Profile</li>
+                </a>
+                <a href="logs.html">
+                    <li> <i class="fa fa-history" aria-hidden="true"></i> &nbsp;All Logs</li>
+                </a>
+                <a href="transaction.html">
+                    <li> <i class="fa fa-credit-card" aria-hidden="true"></i> &nbsp;Transaction
+                    </li>
+                </a>
+                <a href="change_password.html">
+                    <li> <i class="fa fa-key" aria-hidden="true"></i> &nbsp;Change Password</li>
+                </a>
+                <a href="login.html">
+                    <li> <i class="fa fa-sign-out" aria-hidden="true"></i> &nbsp;Logout</li>
+                </a>
+            </ul>
+        </div>
+        <div class="navbar">
+            <div class="dropdown">
+                <button class="dropbtn">Action 
+                            <i class="fa fa-caret-down"></i>
+                          </button>
+                <div class="dropdown-content">
+                    <!-- <div class="header">
+                            <h2>Mega Menu</h2>
+                        </div> -->
+                    <div class="row">
+                        <div class="column">
+                            <h3>Menu</h3>
+                            <a href="profile.html">
+                                <li> <i class="fa fa-user" aria-hidden="true"></i> Profile
+                                </li>
+                            </a>
+                            <a href="logs.html">
+                                <li> <i class="fa fa-history" aria-hidden="true"></i> All Logs</li>
+                            </a>
+                            <a href="transaction.html">
+                                <li> <i class="fa fa-credit-card" aria-hidden="true"></i> Transaction
+                                </li>
+                            </a>
+                            <a href="change_password.html">
+                                <li> <i class="fa fa-key" aria-hidden="true"></i> Change Password</li>
+                            </a>
+                            <a href="login.html">
+                                <li> <i class="fa fa-sign-out" aria-hidden="true"></i> Logout
+                                </li>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-6 col-s-9">
+            <section style="margin: 10px;">
+                <div style="overflow-x:auto;">
+                    <div class="container">
+                        <form>
+                            <fieldset style="min-height:100px;">
+                                <legend><b> Profile Picture </b> </legend>
+                                <div id="default_image"><img src="" alt="profile_image" id="profile_image"></div>
+                                <div id="results"></div>
+                                <div id="my_camera"></div>
+                                <!-- <span style="color: red;display: none;text-align: center;width: 100%; " id="error-message-snap">Please take your snap before submitting the form!</span> -->
+                                <input type="hidden" value="" id="can_img">
+                                <br>
+                                <!-- <input type=button value="Take Snapshot " onClick="take_snapshot() "> -->
+                                <div class="container-screenshot-btn" id="click-screenshot-btn">
+                                    <input type="button" value="Click new image" onClick="take_snapshot()" name="take_image">
+                                </div>
+                                <div class="container-screenshot-btn" style="display: none;" id="click-new-btn">
+                                    <input type="button" value="Take New Image" id="click-new-screenshot-btn" onClick="take_new_snapshot()" name="signup-btn">
+                                </div>
+                                <label> <br/> </label>
+                                <label> <br/> </label>
+                            </fieldset> <br> <br>
+                            <fieldset style="min-height:100px;">
+                                <legend><b> Your Basic Info </b> </legend>
+                                <label> <br/> </label>
+                                <label> <br/> </label>
+                                <div class="row">
+                                    <div class="col-25">
+                                        <label for="fname">First Name</label>
+                                    </div>
+                                    <div class="col-75">
+                                        <input type="text" required id="fname" name="firstname" placeholder="Your name..">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-25">
+                                        <label for="lname">Middle Name</label>
+                                    </div>
+                                    <div class="col-75">
+                                        <input type="text" id="mname" name="middlename" placeholder="Your Middle name..">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-25">
+                                        <label for="lname">Last Name</label>
+                                    </div>
+                                    <div class="col-75">
+                                        <input type="text" required id="lname" name="lastname" placeholder="Your Last name..">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-25">
+                                        <label for="lname">Date of Birth</label>
+                                    </div>
+                                    <div class="col-75">
+                                        <input type="date" required id="dob" name="dob" placeholder="Date of Birth..">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-25">
+                                        <label for="subject">Address</label>
+                                    </div>
+                                    <div class="col-75">
+                                        <input type="text" required id="address" name="address" placeholder="Your address.."> </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-25">
+                                        <label for="subject">Phone#</label>
+                                    </div>
+                                    <div class="col-75">
+                                        <input type="phone" required id="phone" name="phone" placeholder="Your Phone#.."> </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-25">
+                                        <label for="country">Country</label>
+                                    </div>
+                                    <div class="col-75">
+                                        <input type="text" required id="country" name="country" placeholder="Country..">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <input type="submit" onclick="update_profile_btn()" value="Submit">
+                                </div>
+                            </fieldset>
+
+                        </form>
+                    </div>
+                </div>
+        </div>
+    </div> <br> <br> <br>
+    <div class="footer">
+        <p>All right reserved</p>
+    </div>
+
+</body>
+
+</html>
+<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<script>
+    Webcam.set({
+        width: 200,
+        height: 150,
+        image_format: 'jpeg',
+        jpeg_quality: 90
+    });
+    Webcam.attach('#my_camera');
+    //
+</script>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <td><label id="lDisplayPerPg" for="lDisplayPerPg">Reports per page</label>
+                <select name="listDisplayPerPg" id="listDisplayPerPg">
+                      <option value="2" selected="selected">2</option>
+                      <option value="4">4</option>
+                      <option value="6">6</option>
+                      <option value="8">8</option>
+                    </select></td>
+        </tr>
+    </table>
+
+
+    <form method="post" action="">
+        <table id="tadminViewReport" border="0" width="960px" cellpadding="0" cellspacing="0">
+            <tr>
+                <th width="15%">Username</th>
+                <th width="15%">Report ID</th>
+                <th width="40%">Report Title</th>
+                <th width="20%">Date submitted</th>
+                <th width="10%">Status</th>
+            </tr>
+            <tr>
+                <td>username1</td>
+                <td>reportID1</td>
+                <td class="reportDoc">Document 1</td>
+                <td>Date 1</td>
+                <td><a href="admin_report_details.html">Received</a></td>
+            </tr>
+            <tr>
+                <td>username2</td>
+                <td>reportID2</td>
+                <td class="reportDoc">Document 2</td>
+                <td>Date 2</td>
+                <td><a href="admin_report_details.html">In Queue</a></td>
+            </tr>
+            <tr>
+                <td>username3</td>
+                <td>reportID3</td>
+                <td class="reportDoc">Document 3</td>
+                <td>Date 3</td>
+                <td><a href="admin_report_details.html">Completed</a></td>
+            </tr>
+            <tr>
+                <td>username4</td>
+                <td>reportID4</td>
+                <td class="reportDoc">Document 4</td>
+                <td>Date 4</td>
+                <td><a href="admin_report_details.html">In Queue</a></td>
+            </tr>
+            <tr>
+                <td>username5</td>
+                <td>reportID5</td>
+                <td class="reportDoc">Document 5</td>
+                <td>Date 5</td>
+                <td><a href="admin_report_details.html">In Queue</a></td>
+            </tr>
+            <tr>
+                <td>username6</td>
+                <td>reportID6</td>
+                <td class="reportDoc">Document 6</td>
+                <td>Date 6</td>
+                <td><a href="admin_report_details.html">Completed</a></td>
+            </tr>
+            <tr>
+                <td>username7</td>
+                <td>reportID7</td>
+                <td class="reportDoc">Document 7</td>
+                <td>Date 7</td>
+                <td><a href="admin_report_details.html">Completed</a></td>
+            </tr>
+            <tr>
+                <td>username8</td>
+                <td>reportID8</td>
+                <td class="reportDoc">Document 8</td>
+                <td>Date 8</td>
+                <td><a href="admin_report_details.html">Received</a></td>
+            </tr>
+            <tr>
+                <td>username9</td>
+                <td>reportID9</td>
+                <td class="reportDoc">Document 9</td>
+                <td>Date 9</td>
+                <td><a href="admin_report_details.html">Received</a></td>
+            </tr>
+            <tr>
+                <td>username10</td>
+                <td>reportID10</td>
+                <td class="reportDoc">Document 10</td>
+                <td>Date 10</td>
+                <td><a href="admin_report_details.html">Received</a></td>
+            </tr>
+        </table>
+        <div id="pageNavPosition"></div>
+        <br />
+    </form>
+
+    <script type="text/javascript">
+        reportsPerPage = listDisplayPerPg.options[listDisplayPerPg.selectedIndex].value;
+        var pager = new Pager('tadminViewReport', reportsPerPage);
+        pager.init();
+        pager.showPageNav('pager', 'pageNavPosition');
+        pager.showPage(1);
+
+
+
+        function Pager(tableName, itemsPerPage) {
+            //function Pager(tableName, itemsPerPage) {
+            this.tableName = tableName;
+            //    this.itemsPerPage = itemsPerPage;
+            this.currentPage = 1;
+            this.pages = 0;
+            this.inited = false;
+
+            this.showRecords = function(from, to) {
+                var rows = document.getElementById(tableName).rows;
+                // i starts from 1 to skip table header row
+                for (var i = 1; i < rows.length; i++) {
+                    if (i < from || i > to)
+                        rows[i].style.display = 'none';
+                    else
+                        rows[i].style.display = '';
+                }
+            }
+
+            this.showPage = function(pageNumber) {
+                if (!this.inited) {
+                    alert("not inited");
+                    return;
+                }
+
+                var oldPageAnchor = document.getElementById('pg' + this.currentPage);
+                oldPageAnchor.className = 'pg-normal';
+
+                this.currentPage = pageNumber;
+                var newPageAnchor = document.getElementById('pg' + this.currentPage);
+                newPageAnchor.className = 'pg-selected';
+
+                var from = (pageNumber - 1) * Number(itemsPerPage) + 1;
+                var to = (from + Number(itemsPerPage)) - 1;
+                this.showRecords(from, to);
+
+                var pgNext = document.getElementById(this.pagerName + 'pgNext');
+                var pgPrev = document.getElementById(this.pagerName + 'pgPrev');
+
+                if (pgNext != null) {
+                    if (this.currentPage == this.pages) pgNext.style.display = 'none';
+                    else pgNext.style.display = '';
+                }
+                if (pgPrev != null) {
+                    if (this.currentPage == 1) pgPrev.style.display = 'none';
+                    else pgPrev.style.display = '';
+                }
+            }
+
+            this.prev = function() {
+                if (this.currentPage > 1)
+                    this.showPage(this.currentPage - 1);
+            }
+
+            this.next = function() {
+                if (this.currentPage < this.pages) {
+                    this.showPage(this.currentPage + 1);
+                }
+            }
+
+            this.init = function() {
+                var rows = document.getElementById(tableName).rows;
+                var records = (rows.length - 1);
+                this.pages = Math.ceil(records / itemsPerPage);
+                this.inited = true;
+            }
+
+            this.showPageNav = function(pagerName, positionId) {
+                if (!this.inited) {
+                    alert("not inited");
+                    return;
+                }
+                var element = document.getElementById(positionId);
+
+                var pagerHtml = '<span id="' + pagerName + 'pgPrev" onclick="' + pagerName + '.prev();" class="pg-normal"> &#171 Prev </span> &nbsp; ';
+                for (var page = 1; page <= this.pages; page++)
+                    pagerHtml += '<span id="pg' + page + '" class="pg-normal" onclick="' + pagerName + '.showPage(' + page + ');">' + page + '</span> &nbsp; ';
+                pagerHtml += '<span id="' + pagerName + 'pgNext" onclick="' + pagerName + '.next();" class="pg-normal"> Next &#187;</span>';
+
+                element.innerHTML = pagerHtml;
+            }
+        }
+    </script>
+</body>
+
+</html>

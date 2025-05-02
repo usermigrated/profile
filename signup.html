@@ -1,0 +1,64 @@
+<html>
+
+<head>
+    <title> Signup </title>
+    <link rel="stylesheet" type="text/css" href="css/signup.css">
+    <link rel="stylesheet" type="text/css" href="css/util.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <!-- <script href="vendor/jquery/jquery-3.2.1.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+    <div class="login-box">
+        <h1>Create Account</h1>
+        <form name="signup-form" action="login.html">
+            <div id="results"></div>
+            <div id="my_camera"></div>
+            <span style="color: red;display: none;text-align: center;width: 100%; " id="error-message-snap">Please take your snap before submitting the form!</span>
+            <br>
+            <div class="container-screenshot-btn" id="click-screenshot-btn">
+                <input type="button" value="Take Screenshot" onClick="take_snapshot()" class="camera-btn" name="signup-btn">
+            </div>
+            <div class="container-screenshot-btn" style="display: none;" id="click-new-btn">
+                <input type="button" value="Take New Snap" onClick="take_new_snapshot()" class="camera-btn" name="signup-btn">
+            </div>
+            <p>Username</p>
+            <input id="user-name" required type="text" name="username" placeholder="User name">
+            <p>Email</p>
+            <input id="email" required type="email" name="email" placeholder="Email">
+            <p>Password</p>
+            <input id="password" required type="password" name="password" placeholder="Password">
+            <p>Confirm Password</p>
+            <input id="confirm-password" required value="" type="password" name="confirm-pass" placeholder="Confirm Password">
+            <input type="hidden" value="" id="can_img">
+            <div class="container-login-form-btn">
+                <button class="login-form-btn" value="submit" onclick="validateForm()">
+                    Register
+                </button>
+            </div>
+            <br>
+            <br>
+            <a href="login.html">Already have an account? Signin</a> <br> <br>
+        </form>
+    </div>
+</body>
+<script src="js/input-validation.js "></script>
+<!-- <script src="js/signup.js "></script> -->
+<script src="js/signupClass.js"></script>
+<script src="js/take_snapshot.js "></script>
+<script src="js/webcam.min.js "></script>
+
+<!-- <script type="text/javascript " src="js/webcam.min.js "></script> -->
+<script>
+    Webcam.set({
+        width: 200,
+        height: 150,
+        image_format: 'jpeg',
+        jpeg_quality: 90
+    });
+    Webcam.attach('#my_camera');
+</script>
+
+</html>

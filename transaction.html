@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/transaction.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+    <script defer src="js/transaction.js"></script>
+    <script defer src="js/login.js"></script>
+    <script defer src="js/filtertable.js"></script>
+    <script defer src="js/transaction_edit.js"></script>
+    <script defer src="js/add_new_trasaction.js"></script>
+</head>
+
+<body onload="check_user_online()">
+    <div class="row">
+        <div class="col-3 col-s-3 menu">
+            <a href="profile.html">
+                <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" id="dashboard_image">
+            </a>
+            <!-- <br> -->
+            <h5 id="Username" style="text-align: center;color: oldlace;"></h5>
+            <hr>
+            <ul>
+                <a href="profile.html">
+                    <li> <i class="fa fa-user" aria-hidden="true"></i> &nbsp; Profile</li>
+                </a>
+                <a href="logs.html">
+                    <li> <i class="fa fa-history" aria-hidden="true"></i> &nbsp;All Logs</li>
+                </a>
+                <a href="transaction.html">
+                    <li> <i class="fa fa-credit-card" aria-hidden="true"></i> &nbsp;Transaction
+                    </li>
+                </a>
+                <a href="change_password.html">
+                    <li> <i class="fa fa-key" aria-hidden="true"></i> &nbsp;Change Password</li>
+                </a>
+                <a href="login.html">
+                    <li> <i class="fa fa-sign-out" aria-hidden="true"></i> &nbsp;Logout</li>
+                </a>
+            </ul>
+        </div>
+        <div class="navbar">
+            <div class="dropdown">
+                <button class="dropbtn">Menu 
+                        <i class="fa fa-caret-down"></i>
+                      </button>
+                <div class="dropdown-content">
+                    <!-- <div class="header">
+                        <h2>Mega Menu</h2>
+                    </div> -->
+                    <div class="row">
+                        <div class="column">
+                            <h3>Menu</h3>
+                            <a href="profile.html">
+                                <li> <i class="fa fa-user" aria-hidden="true"></i> Profile
+                                </li>
+                            </a>
+                            <a href="logs.html">
+                                <li> <i class="fa fa-history" aria-hidden="true"></i> All Logs</li>
+                            </a>
+                            <a href="transaction.html">
+                                <li> <i class="fa fa-credit-card" aria-hidden="true"></i> Transaction
+                                </li>
+                            </a>
+                            <a href="change_password.html">
+                                <li> <i class="fa fa-key" aria-hidden="true"></i> Change Password</li>
+                            </a>
+                            <a href="login.html">
+                                <li> <i class="fa fa-sign-out" aria-hidden="true"></i> Logout
+                                </li>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-6 col-s-9">
+            <!-- Detail Modal -->
+            <div id="detailModal" class="modal">
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span class="close">&times;</span>
+                        <h2 style="text-align: center;">Transaction detail</h2>
+                    </div>
+                    <div class="modal-body">
+                        <form id="contact" class="contact" action="" method="post">
+                            <!-- <label for="">Request_id</label>
+                            <fieldset>
+                                <input placeholder="Your name" type="text" tabindex="1" required autofocus>
+                            </fieldset> -->
+                            <label for="">Name</label>
+                            <fieldset>
+                                <input placeholder="Your Name" disabled id="modal_name" type="text" tabindex="2" required>
+                            </fieldset>
+                            <label for="">Email</label>
+                            <fieldset>
+                                <input placeholder="Your Email" disabled id="modal_email" type="email" tabindex="3" required>
+                            </fieldset>
+                            <label for="">Date of Birth</label>
+                            <fieldset>
+                                <input placeholder="Your date of birth" disabled id="modal_dob" type="text" tabindex="4" required>
+                            </fieldset>
+                            <label for="">Services</label>
+                            <fieldset>
+                                <input placeholder="Services" disabled id="modal_services" type="text" tabindex="4" required>
+                            </fieldset>
+                            <label for="">Country</label>
+                            <fieldset>
+                                <input placeholder="Your Country" disabled id="modal_country" type="text" tabindex="4" required>
+                            </fieldset>
+                            <label for="">Reference</label>
+                            <fieldset>
+                                <input placeholder="Your Reference" disabled id="modal_reference" type="text" tabindex="4" required>
+                            </fieldset>
+                            <label for="">Status</label>
+                            <fieldset>
+                                <input placeholder="Your Status" disabled id="modal_status" type="text" tabindex="4" required>
+                            </fieldset>
+                            <label for="">Time</label>
+                            <fieldset>
+                                <input placeholder="Time" disabled id="modal_time" style="width: 100%;" type="text" tabindex="4" required>
+                            </fieldset>
+
+                            <!-- <fieldset>
+                                <button name="submit" type="submit" id="transaction_edit_submit" data-submit="...Sending">Submit</button>
+                            </fieldset> -->
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- ///////////////////////////////////////////////end detail modal///////////////////////////////////////////////////// -->
+
+
+            <!-- Start Edit Modal -->
+            <div id="editModal" class="modal">
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span class="close">&times;</span>
+                        <h2 style="text-align: center;">Edit Transaction</h2>
+                    </div>
+                    <div class="modal-body">
+                        <form id="contact_edit" class="contact" action="#" method="POST">
+                            <input type="hidden" id="trasaction_index" readonly>
+                            <label for="">Name</label>
+                            <fieldset>
+                                <input placeholder="Your Name" id="edit_modal_name" type="text" tabindex="2" required>
+                            </fieldset>
+                            <label for="">Email</label>
+                            <fieldset>
+                                <input placeholder="Your Email" id="edit_modal_email" type="email" tabindex="3" required>
+                            </fieldset>
+                            <label for="">Date of Birth</label>
+                            <fieldset>
+                                <input placeholder="Your date of birth" id="edit_modal_dob" type="text" tabindex="4" required>
+                            </fieldset>
+                            <label for="">Services</label>
+                            <fieldset>
+                                <input placeholder="Services" id="edit_modal_services" type="text" tabindex="4" required>
+                            </fieldset>
+                            <label for="">Country</label>
+                            <fieldset>
+                                <input placeholder="Your Country" id="edit_modal_country" type="text" tabindex="4" required>
+                            </fieldset>
+                            <label for="">Reference</label>
+                            <fieldset>
+                                <input placeholder="Your Reference" id="edit_modal_reference" type="text" tabindex="4" required>
+                            </fieldset>
+                            <label for="">Status</label>
+                            <fieldset>
+                                <input placeholder="Your Status" id="edit_modal_status" type="text" tabindex="4" required>
+                            </fieldset>
+                            <label for="">Time</label>
+                            <fieldset>
+                                <input placeholder="Time" id="edit_modal_time" style="width: 100%;" type="text" tabindex="4" required>
+                            </fieldset>
+                            <fieldset>
+                                <button type="submit" value="submit" class="login-form-btn">
+                                            Update
+                                        </button>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- /////////////////////////////////////////// End Edit modal ////////////////////////////////////// -->
+            <div align="left">
+                <h1>All Transaction</h1>
+            </div>
+            <!-- /////////////////////////////////////////// Add new trasaction //////////////////////////////  -->
+            <!-- <img src="https://thumbs.gfycat.com/AggravatingEvilKestrel-max-1mb.gif" alt=""> -->
+            <div align="right">
+                <button class="advance_search_button" id="advance_search_button"><i class="fa fa-calendar"></i> Advance Search</button>
+                <button class="add_trasaction_btn" id="add_new_trans"><i class="fa fa-plus"></i> Add New Transaction</button>
+            </div>
+            <br> <br>
+            <!-- advance_search_form -->
+            <form action="" style="display: none;" class="advance_search_form">
+                <input type="text" id="name_advance" placeholder="Name">
+                <input type="text" id="email_advance" placeholder="Email Address">
+                <input type="date" id="dob_advance" placeholder="Date of Birth">
+                <input type="text" id="services_advance" placeholder="Services">
+                <input type="text" id="country_advance" placeholder="Country">
+                <input type="text" id="reference_advance" placeholder="Reference">
+                <input type="datetime-local" id="time_advance" placeholder="Time">
+                <input type="text" id="status_advance" placeholder="Status">
+                <button class="submit_advance_search_btn" id="advance_search_btn">Search</button>
+
+            </form>
+            <!-- end advance search form -->
+            <div id="add_new_trasaction" class="modal">
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span class="close">&times;</span>
+                        <h2 style="text-align: center;">Add Transaction detail</h2>
+                    </div>
+                    <div class="modal-body">
+                        <form id="contact" class="contact" action="" method="post">
+                            <label for="">First Name</label>
+                            <fieldset>
+                                <input placeholder="Your First Name" id="add_modal_fname" type="text" tabindex="2">
+                            </fieldset>
+                            <label for="">Middle Name</label>
+                            <fieldset>
+                                <input placeholder="Your Middle Name" id="add_modal_mname" type="text" tabindex="2">
+                            </fieldset>
+                            <label for="">Last Name</label>
+                            <fieldset>
+                                <input placeholder="Your Last Name" id="add_modal_lname" type="text" tabindex="2">
+                            </fieldset>
+                            <label for="">Email</label>
+                            <fieldset>
+                                <input placeholder="Your Email" id="add_modal_email" type="email" tabindex="3">
+                            </fieldset>
+                            <label for="">Phone#</label>
+                            <fieldset>
+                                <input placeholder="Your Phone#" id="add_modal_phone" type="text" tabindex="4">
+                            </fieldset>
+                            <label for="">Address</label>
+                            <fieldset>
+                                <input placeholder="Your Address" id="add_modal_address" type="text" tabindex="4">
+                            </fieldset>
+                            <label for="">Date of Birth</label>
+                            <fieldset>
+                                <input placeholder="Your date of birth" id="add_modal_dob" type="text" tabindex="4">
+                            </fieldset>
+                            <label for="">Services</label>
+                            <fieldset>
+                                <input placeholder="Services" id="add_modal_services" type="text" tabindex="4">
+                            </fieldset>
+                            <label for="">Country</label>
+                            <fieldset>
+                                <input placeholder="Your Country" id="add_modal_country" type="text" tabindex="4">
+                            </fieldset>
+                            <label for="">Reference</label>
+                            <fieldset>
+                                <input placeholder="Your Reference" id="add_modal_reference" type="text" tabindex="4">
+                            </fieldset>
+                            <label for="">Issue Date</label>
+                            <fieldset>
+                                <input placeholder="Issue date" id="add_modal_issuedate" type="text" tabindex="4">
+                            </fieldset>
+                            <label for="">Status</label>
+                            <fieldset>
+                                <input placeholder="Your Status" id="add_modal_status" type="text" tabindex="4">
+                            </fieldset>
+                            <fieldset>
+                                <button name="submit" type="submit" id="add_new_trans_btn" data-submit="...Sending">Add</button>
+                            </fieldset>
+                            <span style="display: none;color: red;" id='error_trsansaction_msg'> <strong>Error: </strong> All Fields is required</span>
+                            <span style="display: none;color: blue;" id='new_trsansaction_msg'> <strong>Success</strong> New Transaction Created!</span>
+                            <!-- <h2 style="display: none;color: lime;" id="new_trsansaction_msg">New Transaction Created successfully!</h2> -->
+                        </form>
+                    </div>
+                </div>
+            </div> <br> <br>
+            <!-- <div id="add_trans_title"></div> -->
+            <!-- <span>Add Transaction</span> -->
+            <input type="text" id="myInput" placeholder="Search here..." title="Type in a name"> <br>
+            <div style="overflow-x:auto;" class="myinputt">
+                <table id="transaction_table" class="pagination">
+                    <tr class="header_table">
+                        <th>Name <br> <br>
+                            <input type="text" id="name_input" placeholder="Search"></th>
+                        <th>Email <br> <br>
+                            <input type="text" id="email_input" placeholder="Search"></th>
+                        </th>
+                        <th>Dob <br> <br>
+                            <input type="text" id="dob_input" placeholder="Search"></th>
+                        </th>
+                        <th>Services <br> <br>
+                            <input type="text" id="services_input" placeholder="Search"></th>
+                        </th>
+                        <th>Country <br> <br>
+                            <input type="text" id="country_input" placeholder="Search"></th>
+                        </th>
+                        <th>Reference <br> <br>
+                            <input type="text" id="reference_input" placeholder="Search"></th>
+                        </th>
+                        <th>Time <br> <br>
+                            <input type="text" id="time_input" placeholder="Search"></th>
+                        </th>
+                        <th>Status <br> <br>
+                            <input type="text" id="status_input" placeholder="Search"></th>
+                        </th>
+                        <th id="detail">Detail</th>
+                        <th id="detail">Edit</th>
+                        <th id="detail">Delete</th>
+                    </tr>
+                </table>
+                <!-- <div id="cunt"></div><br> -->
+                <span id="no_data" style="display: none;color: red;text-align: center;">No Data Found</span>
+            </div> <br>
+            <!-- <br> <br> <br> <br> -->
+        </div>
+    </div> <br> <br>
+    <div class="footer ">
+        <p>All right reserved</p>
+    </div>
+</body>
+
+</html>
+
+<script>
+    $(document).ready(function() {
+        $(".advance_search_button").click(function() {
+            $(".advance_search_form").toggle(500);
+        });
+    });
+</script>
