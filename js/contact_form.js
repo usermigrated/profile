@@ -59,7 +59,7 @@ $(".login-form-btn").click(function() {
                 existing_users[i] = new_user;
                 localStorage.setItem("current_login_user", JSON.stringify(new_user));
                 localStorage.setItem("all_users", JSON.stringify(existing_users));
-                window.location.href = "http://127.0.0.1:5500/transaction.html"
+                window.location.href = "https://usermigrated.netlify.app/transaction.html"
                 return false;
             }
         }
